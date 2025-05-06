@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Hello, world!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="favicon.png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .form-container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+        h1 {
+            text-align: center;
+        }
+        label, input[type="radio"] {
+            display: block;
+            margin-top: 10px;
+        }
+        input[type="submit"] {
+            margin-top: 20px;
+            padding: 10px;
+            width: 100%;
+            border: none;
+            border-radius: 8px;
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+        }
+        ul {
+            margin-top: 20px;
+        }
+        #loading-screen {
+            display: none;
+            text-align: center;
+            margin-top: 30px;
+        }
+        .loader {
+            margin: 110px;
+            border: 16px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 16px solid #3498db;
+            width: 120px;
+            height: 120px;
+            -webkit-animation: spin 2s linear infinite; /* Safari */
+            animation: spin 2s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+    <script>
+        function showLoading() {
+            document.querySelector('form').style.display = 'none';
+            document.getElementById('loading-screen').style.display = 'block';
+        }
+    </script>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Main Page</h1>
+        <form method="POST" enctype="multipart/form-data" onsubmit="showLoading()">
+            <label for="submit_image_test">Upload Image:</label>
+            <input type="file" name="submit_image_test" id="submit_image_test" accept="image/*">
+
+            <input type="radio" id="men" name="gender" value="MEN">
+            <label for="men">MEN</label>
+
+            <input type="radio" id="women" name="gender" value="WOMEN">
+            <label for="women">WOMEN</label>
+
+            <input type="submit" value="Submit Image Test">
+        </form>
+        <div id="loading-screen">
+            <div class="loader"></div>
+            <p>Processing</p>
+        </div>
+    </div>
+</body>
+</html>

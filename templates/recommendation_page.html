@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Recommendation Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+        }
+        .content {
+            max-width: 800px;
+            width: 100%;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        .recommendations-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .recommended-item {
+            width: 180px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 10px;
+            background-color: #fff;
+            box-shadow: 2px 2px 6px rgba(0,0,0,0.05);
+        }
+        .recommended-item img {
+            max-width: 100%;
+            border-radius: 6px;
+            height: auto;
+        }
+        img {
+            display: block;
+            margin: 10px auto;
+            border-radius: 8px;
+        }
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 30px;
+            color: #007BFF;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        p {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h1>Recommendation Page</h1>
+
+        {% if error %} <!--If there is an error-->
+            <p style="color: red;">{{ error }}</p>
+        {% endif %}
+
+        {% if users_image %} <!--displays the users image-->
+            <div>
+                <h2>Your Uploaded Image:</h2>
+                <img src="{{ users_image }}" alt="Uploaded Image" style="max-width: 300px;">
+            </div>
+        {% endif %}
+
+        {% if gender %} <!--displays the selected gender-->
+            <p><strong>Gender:</strong> {{ gender }}</p>
+        {% endif %}
+
+        {% if returned_images %}
+            <div> <!--displays the returned images-->
+                <h2>Recommended Items ({{ returned_images|length }}):</h2> <!--number of returned images, Flask uses jinja2, hence the '|'-->
+                <div class="recommendations-container">
+                    {% for image_url in returned_images %} <!--loops through returned_images-->
+                        <div class="recommended-item">
+                            <img src="{{ image_url }}" alt="Recommended item"> <!--Displays the images -->
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+
+        <a href="{{ url_for('main') }}">Return Home</a> <!--Returns to main page-->
+    </div>
+</body>
+</html>
